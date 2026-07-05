@@ -153,7 +153,7 @@ netmon/
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/<your-username>/netmon.git
+git clone https://github.com/Vara693/netmon.git
 cd netmon
 
 # 2. Create a virtual environment
