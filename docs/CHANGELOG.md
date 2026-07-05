@@ -66,5 +66,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-[2.0.0]: https://github.com/username/netmon/releases/tag/v2.0.0
-[1.0.0]: https://github.com/username/netmon/releases/tag/v1.0.0
+[2.0.0]: https://github.com/Vara693/netmon/releases/tag/v2.0.0
+[1.0.0]: https://github.com/Vara693/netmon/releases/tag/v1.0.0

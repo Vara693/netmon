@@ -25,7 +25,7 @@ unacceptable behavior to the project maintainers.
 1. **Fork** the repository on GitHub
 2. **Clone** your fork locally:
    ```bash
-   git clone https://github.com/<your-username>/netmon.git
+   git clone https://github.com/Vara693/netmon.git
    cd netmon
    ```
 3. **Create a branch** for your changes:
