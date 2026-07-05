@@ -1,0 +1,17 @@
+# Core 
+scapy==2.5.0            # Packet capture and parsing
+Flask==3.0.3            # REST API + dashboard serving
+Flask-CORS==4.0.1       # Cross-origin support
+Flask-Login==0.6.3      # Session-based authentication
+pymongo==4.7.2          # MongoDB driver
+
+# Data Processing 
+numpy==1.26.4           # Statistical anomaly detection (Z-score)
+
+# Utilities 
+python-dotenv==1.0.1    # Load .env files for secrets
+click==8.1.7            # CLI argument parsing in main.py
+
+# Testing
+pytest==8.2.2
+pytest-mock==3.14.0

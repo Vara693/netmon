@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NetMon — Real-Time Network Monitor</title>
+  <link rel="stylesheet" href="../static/styles/style.css" />
+  <!-- Chart.js from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ TOP NAV ═════ -->
+<header class="navbar">
+  <div class="navbar-brand">
+    <span class="brand-icon">⬡</span>
+    <span class="brand-name">NET<span class="accent">MON</span></span>
+    <span class="brand-tag">v2.0</span>
+  </div>
+
+  <div class="navbar-status">
+    <span class="status-dot" id="statusDot"></span>
+    <span id="statusLabel">CONNECTING…</span>
+  </div>
+
+  <div class="navbar-actions">
+    <button class="btn-ghost" onclick="exportCSV()">⬇ CSV</button>
+    <button class="btn-ghost" onclick="exportJSON()">⬇ JSON</button>
+    <a href="/logout" class="btn-ghost">⎋ Logout</a>
+  </div>
+</header>
+
+<!-- ═════════════════════════════════════════════════ STAT CARDS ROW ═════ -->
+<main class="layout">
+
+  <section class="stat-row">
+    <div class="stat-card" id="card-pps">
+      <div class="stat-label">PACKETS / SEC</div>
+      <div class="stat-value" id="val-pps">—</div>
+      <div class="stat-sub" id="sub-pps">live</div>
+    </div>
+    <div class="stat-card" id="card-bw">
+      <div class="stat-label">BANDWIDTH</div>
+      <div class="stat-value" id="val-bw">—</div>
+      <div class="stat-sub">Mbps</div>
+    </div>
+    <div class="stat-card" id="card-total">
+      <div class="stat-label">TOTAL PACKETS</div>
+      <div class="stat-value" id="val-total">—</div>
+      <div class="stat-sub">since start</div>
+    </div>
+    <div class="stat-card" id="card-conns">
+      <div class="stat-label">ACTIVE CONNS</div>
+      <div class="stat-value" id="val-conns">—</div>
+      <div class="stat-sub">connections</div>
+    </div>
+    <div class="stat-card alert-card" id="card-alerts">
+      <div class="stat-label">ALERTS</div>
+      <div class="stat-value" id="val-alerts">0</div>
+      <div class="stat-sub">last hour</div>
+    </div>
+  </section>
+
+<!-- ═════════════════════════════════════════ CHARTS ROW ═════ -->
+  <section class="chart-row">
+    <!-- Traffic over time -->
+    <div class="panel panel-wide">
+      <div class="panel-header">
+        <span class="panel-title">Traffic Over Time</span>
+        <span class="panel-badge" id="chart-refresh">LIVE</span>
+      </div>
+      <div class="chart-container">
+        <canvas id="trafficChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Protocol doughnut -->
+    <div class="panel panel-narrow">
+      <div class="panel-header">
+        <span class="panel-title">Protocol Distribution</span>
+      </div>
+      <div class="chart-container chart-doughnut">
+        <canvas id="protocolChart"></canvas>
+      </div>
+    </div>
+  </section>
+
+<!-- ═══════════════════════════════════════ TABLES ROW ═════ -->
+  <section class="table-row">
+
+    <!-- Top Talkers -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">Top Talkers</span>
+        <span class="panel-badge">IP BY VOLUME</span>
+      </div>
+      <table class="data-table" id="talkersTable">
+        <thead>
+          <tr><th>IP ADDRESS</th><th>PACKETS</th><th>BYTES</th><th>SHARE</th></tr>
+        </thead>
+        <tbody id="talkersBody">
+          <tr><td colspan="4" class="empty-row">Waiting for data…</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Alerts Panel -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">Live Alerts</span>
+        <button class="btn-clear" onclick="clearAlertDisplay()">CLEAR</button>
+      </div>
+      <div class="alerts-feed" id="alertsFeed">
+        <div class="alert-empty">No alerts detected.</div>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<!-- ════════════════════════════════════════════════════ TIMESTAMP BAR ════ -->
+<footer class="footer">
+  <span>Last updated: <span id="lastUpdated">—</span></span>
+  <span>Interface: <span id="dbStatus">—</span></span>
+</footer>
+
+<script src="../static/js/dashboard.js"></script>
+</body>
+</html>

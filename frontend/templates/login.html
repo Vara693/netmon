@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NetMon — Login</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Courier New', monospace;
+      background: #060a12;
+      color: #c8e0ff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Animated grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,200,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,200,255,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: grid-drift 20s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes grid-drift { to { background-position: 40px 40px; } }
+
+    .login-card {
+      background: rgba(8, 18, 38, 0.92);
+      border: 1px solid rgba(0, 200, 255, 0.2);
+      border-radius: 4px;
+      padding: 3rem 2.5rem;
+      width: 380px;
+      box-shadow:
+        0 0 40px rgba(0,200,255,0.08),
+        0 0 1px rgba(0,200,255,0.4);
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .logo-icon {
+      font-size: 2.5rem;
+      display: block;
+      margin-bottom: 0.5rem;
+      filter: drop-shadow(0 0 12px #00c8ff);
+    }
+    .logo h1 {
+      font-size: 1.5rem;
+      letter-spacing: 0.3em;
+      color: #00c8ff;
+      text-transform: uppercase;
+    }
+    .logo p {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: #4a7090;
+      margin-top: 0.3rem;
+      text-transform: uppercase;
+    }
+
+    label {
+      display: block;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      color: #4a7090;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+      margin-top: 1.2rem;
+    }
+    input {
+      width: 100%;
+      background: rgba(0,200,255,0.04);
+      border: 1px solid rgba(0,200,255,0.15);
+      border-radius: 2px;
+      color: #c8e0ff;
+      font-family: inherit;
+      font-size: 0.9rem;
+      padding: 0.65rem 0.8rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input:focus {
+      border-color: rgba(0,200,255,0.5);
+      box-shadow: 0 0 0 2px rgba(0,200,255,0.1);
+    }
+
+    .error {
+      background: rgba(255,60,60,0.1);
+      border: 1px solid rgba(255,60,60,0.3);
+      color: #ff6060;
+      padding: 0.6rem 0.8rem;
+      border-radius: 2px;
+      font-size: 0.78rem;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 1.8rem;
+      padding: 0.75rem;
+      background: linear-gradient(135deg, #0080cc, #00c8ff);
+      border: none;
+      border-radius: 2px;
+      color: #000d1a;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: bold;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+    button:hover  { opacity: 0.9; transform: translateY(-1px); }
+    button:active { transform: translateY(0); }
+
+    .hint {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.68rem;
+      color: #2a4060;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <div class="logo">
+      <span class="logo-icon">⬡</span>
+      <h1>NetMon</h1>
+      <p>Network Monitoring System</p>
+    </div>
+
+    <form method="POST" action="/login">
+      <label for="username">Username</label>
+      <input id="username" name="username" type="text"
+             autocomplete="username" placeholder="admin" required />
+
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password"
+             autocomplete="current-password" placeholder="••••••••" required />
+
+      {% if error %}
+        <div class="error">⚠ {{ error }}</div>
+      {% endif %}
+
+      <button type="submit">AUTHENTICATE →</button>
+    </form>
+
+    <p class="hint">Secured access only. All sessions are logged.</p>
+  </div>
+</body>
+</html>
